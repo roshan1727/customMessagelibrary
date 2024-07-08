@@ -1,3 +1,4 @@
+// Custom library JavaScript file: custom-library.js
 
 // CSS styles for the message card
 const styles = `
@@ -37,9 +38,53 @@ function createMessageCard(message) {
     return card;
 }
 
-// Exporting the function for use in other scripts
+// Function to create an SAP UI5 table
+function createTable() {
+    const Table = sap.ui.require('sap/m/Table');
+    const Column = sap.ui.require('sap/m/Column');
+    const Label = sap.ui.require('sap/m/Label');
+    const ColumnListItem = sap.ui.require('sap/m/ColumnListItem');
+    const Text = sap.ui.require('sap/m/Text');
+    const Model = sap.ui.require('sap/ui/model/json/JSONModel');
+
+    const oTable = new Table({
+        inset: true,
+        headerText: "Sample Table",
+        columns: [
+            new Column({
+                header: new Label({ text: "Column 1" })
+            }),
+            new Column({
+                header: new Label({ text: "Column 2" })
+            })
+        ]
+    });
+
+    const aData = [
+        { col1: "Row 1, Col 1", col2: "Row 1, Col 2" },
+        { col1: "Row 2, Col 1", col2: "Row 2, Col 2" }
+    ];
+
+    const oModel = new Model();
+    oModel.setData({ rows: aData });
+    oTable.setModel(oModel);
+
+    const oTemplate = new ColumnListItem({
+        cells: [
+            new Text({ text: "{col1}" }),
+            new Text({ text: "{col2}" })
+        ]
+    });
+
+    oTable.bindItems("/rows", oTemplate);
+
+    return oTable;
+}
+
+// Exporting the functions for use in other scripts
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = {
-        createMessageCard: createMessageCard
+        createMessageCard: createMessageCard,
+        createTable: createTable
     };
 }
