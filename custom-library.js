@@ -4,9 +4,10 @@
 const styles = `
 .message-card {
     padding: 20px;
-    background-color: #f0f0f0;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);;
     border: 1px solid #ccc;
     border-radius: 5px;
+    color:black;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
     animation: cheer-up 1s ease-in-out;
