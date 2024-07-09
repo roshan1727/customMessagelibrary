@@ -82,10 +82,50 @@ function createTable() {
     return oTable;
 }
 
+function createCustomTable(data) {
+    const Table = sap.ui.require('sap/m/Table');
+    const Column = sap.ui.require('sap/m/Column');
+    const Label = sap.ui.require('sap/m/Label');
+    const ColumnListItem = sap.ui.require('sap/m/ColumnListItem');
+    const Text = sap.ui.require('sap/m/Text');
+    const oTable = new Table({
+        inset: false,
+        headerText: "Company Data",
+        columns: []
+    });
+
+    if (data && data.length > 0) {
+        // Create table columns dynamically
+        const aKeys = Object.keys(data[0]);
+        aKeys.forEach(sKey => {
+            oTable.addColumn(new Column({
+                header: new Label({ text: sKey })
+            }));
+        });
+
+        // Bind data to the table
+        const oTemplate = new ColumnListItem({
+            cells: aKeys.map(sKey => new Text({ text: "{" + sKey + "}" }))
+        });
+
+        oTable.bindItems({
+            path: "/",
+            template: oTemplate
+        });
+
+        // Set the model
+        const oModel = new sap.ui.model.json.JSONModel(data);
+        oTable.setModel(oModel);
+    }
+
+    return oTable;
+}
+
 // Exporting the functions for use in other scripts
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = {
         createMessageCard: createMessageCard,
-        createTable: createTable
+        createTable: createTable,
+        createCustomTable: createCustomTable
     };
 }
