@@ -1,4 +1,4 @@
-// Custom library JavaScript file: custom-library.js
+
 
 // CSS styles for the message card
 const styles = `
