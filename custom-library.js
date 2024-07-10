@@ -1,6 +1,3 @@
-
-
-// CSS styles for the message card
 const styles = `
 .message-card {
     padding: 20px;
@@ -53,27 +50,42 @@ function createTable() {
         headerText: "Sample Table",
         columns: [
             new Column({
-                header: new Label({ text: "Column 1" })
+                header: new Label({
+                    text: "Column 1"
+                })
             }),
             new Column({
-                header: new Label({ text: "Column 2" })
+                header: new Label({
+                    text: "Column 2"
+                })
             })
         ]
     });
 
-    const aData = [
-        { col1: "Row 1, Col 1", col2: "Row 1, Col 2" },
-        { col1: "Row 2, Col 1", col2: "Row 2, Col 2" }
+    const aData = [{
+            col1: "Row 1, Col 1",
+            col2: "Row 1, Col 2"
+        },
+        {
+            col1: "Row 2, Col 1",
+            col2: "Row 2, Col 2"
+        }
     ];
 
     const oModel = new Model();
-    oModel.setData({ rows: aData });
+    oModel.setData({
+        rows: aData
+    });
     oTable.setModel(oModel);
 
     const oTemplate = new ColumnListItem({
         cells: [
-            new Text({ text: "{col1}" }),
-            new Text({ text: "{col2}" })
+            new Text({
+                text: "{col1}"
+            }),
+            new Text({
+                text: "{col2}"
+            })
         ]
     });
 
@@ -99,13 +111,18 @@ function createCustomTable(data) {
         const aKeys = Object.keys(data[0]);
         aKeys.forEach(sKey => {
             oTable.addColumn(new Column({
-                header: new Label({ text: sKey })
+                header: new Label({
+                    text: sKey
+                }),
+                width: "75px"
             }));
         });
 
         // Bind data to the table
         const oTemplate = new ColumnListItem({
-            cells: aKeys.map(sKey => new Text({ text: "{" + sKey + "}" }))
+            cells: aKeys.map(sKey => new Text({
+                text: "{" + sKey + "}"
+            }))
         });
 
         oTable.bindItems({
